@@ -20,6 +20,7 @@ describe("Cypress learn", () => {
     cy.get("@.productsLocator").find(".product").each(($el, index, $list) => {
 
       const vegeText=$el.find("h4.product-name").text()
+      
       if (vegeText.includes("Cashews")) 
       {
         cy.wrap($el).find("button").click()

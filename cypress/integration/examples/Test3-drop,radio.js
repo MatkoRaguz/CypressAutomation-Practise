@@ -29,10 +29,12 @@ describe('ClickAcademy', () => {
         cy.get("#autocomplete").type("sw")
         
 
-        cy.get(".ui-menu-item").each(($el, $list, index) =>{
+        cy.get(".ui-menu-item").each(($el, $list, index) =>
+        {
             if ($el.text()==="Switzerland") {
                 cy.wrap($el).click()
-            }
+        }
+        
         // cy.get("#autocomplete").should("have.value", "Switzerland")
 
         })

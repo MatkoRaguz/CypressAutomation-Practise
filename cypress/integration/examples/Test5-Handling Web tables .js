@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 describe("Handling Web tables", () => {
     
     it('test', () => {
@@ -6,7 +8,7 @@ describe("Handling Web tables", () => {
         
 
         //Handling Web tables 
-        
+
         cy.get("tr td:nth-child(2)").each(($el, index, $list) => {
             
             const text = $el.text()

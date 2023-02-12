@@ -13,6 +13,19 @@
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
 //
+
+Cypress.Commands.add("selectProduct", (productName) => { 
+    cy.get("h4.card-title").each(($el, index, $list) =>{
+        if ($el.text().includes(productName))
+        {
+            cy.get(".btn.btn-info").eq(index).click()
+            
+        }
+    })
+ })
+
+
+
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
@@ -23,3 +36,5 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+

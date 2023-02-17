@@ -1,5 +1,10 @@
 /// <reference types="Cypress" />
 
+import HomePage from "../pageObject/HomePage"
+import PlpShop from "../pageObject/PlpShop"
+
+
+
 describe('Test Framework', () => {
 
     before(function () {
@@ -10,18 +15,22 @@ describe('Test Framework', () => {
     })
     
     it('Test', function () {
+        const Homepage = new HomePage()
+        const Plp = new PlpShop()
+
         cy.visit("https://rahulshettyacademy.com/angularpractice/")
-        cy.get(".form-control").eq(0).type(this.data.name)
-        cy.get("#exampleFormControlSelect1").select(this.data.gender)
-        cy.get(".ng-valid").eq(1).should("have.value", this.data.name)
+        Homepage.getEditBox().type(this.data.name)
+        Homepage.getGender().select(this.data.gender)
+        Homepage.get2wayBox().should("have.value", this.data.name)
 
         
-        cy.get(".nav-link").contains("Shop").click()
+        Homepage.shopLinkButton().click()
                
         this.data.productsName.forEach(function (element) {
             cy.selectProduct(element)
         })
 
+        Plp.checkoutButton().click()
     })
 
 

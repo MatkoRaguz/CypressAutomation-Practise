@@ -5,6 +5,7 @@ import PlpShop from "../pageObject/PlpShop"
 
 
 
+
 describe('Test Framework', () => {
 
     before(function () {
@@ -31,6 +32,29 @@ describe('Test Framework', () => {
         })
 
         Plp.checkoutButton().click()
+
+        //Itterate thru price of product and sum them to match final price
+    
+        var sum = 0
+        cy.get("tr td:nth-child(4) strong").each(($el, index, $list) => {
+
+            const amount = $el.text()
+            var res = amount.split(" ")
+            res = res[1].trim()
+            sum = sum + res
+
+            cy.log(sum)
+        })
+
+        //final checkout
+        cy.get(".btn-success").click()
+        cy.get('#country').type("Croatia")
+        cy.get('.suggestions > ul > li > a').click()
+        //cy.get('.suggestions > ul > li > a').click()
+        cy.get("#checkbox2").check( {force: true} )
+        cy.get(".btn-success").click()
+        cy.get(".alert-success").contains("Success! Thank you! Your order will be delivered in next few weeks :-).")
+       
     })
 
 

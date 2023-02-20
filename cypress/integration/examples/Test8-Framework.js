@@ -41,10 +41,25 @@ describe('Test Framework', () => {
             const amount = $el.text()
             var res = amount.split(" ")
             res = res[1].trim()
-            sum = sum + res
+            sum = Number(sum) + Number (res)
+                     
+        }).then(() => {
 
             cy.log(sum)
+
         })
+
+        //Summ total total price to match sum of all product prices
+        
+        cy.get("h3 strong").then(function(element) {
+            const amount = element.text()
+            var res = amount.split(" ")
+            var total = res[1].trim()
+            expect(Number(total)).to.equal(sum)
+
+        })
+        
+
 
         //final checkout
         cy.get(".btn-success").click()

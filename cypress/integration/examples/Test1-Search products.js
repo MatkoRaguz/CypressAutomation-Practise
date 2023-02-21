@@ -36,3 +36,17 @@ describe("Cypress learn", () => {
   });
 
 });
+
+
+cy.get("tr td:nth-child(4) strong").then(function ($cells) {
+    const totals = $cells
+      .toArray()
+      .map(function (el) {return el.innerText})
+      .map(function (s) {return s.replace('₹.', '')})
+      .map(parseFloat)
+
+    const sum = Cypress._.sum(totals)
+    cy.log(`Total should be ${sum}`)
+    cy.contains("h3 strong", '₹.' + sum)
+
+  })

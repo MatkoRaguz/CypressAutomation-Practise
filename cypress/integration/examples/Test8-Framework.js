@@ -33,31 +33,45 @@ describe('Test Framework', () => {
 
         Plp.checkoutButton().click()
 
-        //Itterate thru price of product and sum them to match final price
+        // //Itterate thru price of product and sum them to match final price
     
-        var sum = 0
-        cy.get("tr td:nth-child(4) strong").each(($el, index, $list) => {
+        // var sum = 0
+        // cy.get("tr td:nth-child(4) strong").each(($el) => {
 
-            const amount = $el.text()
-            var res = amount.split(" ")
-            res = res[1].trim()
-            sum = Number(sum) + Number (res)
+        //     const amount = $el.text()
+        //     var res = amount.split(" ")
+        //     res = res[1].trim()
+        //     sum = Number(sum) + Number (res)
                      
-        }).then(() => {
+        // }).then(() => {
 
-            cy.log(sum)
+        //     cy.log(sum)
 
-        })
+        // })
 
-        //Summ total total price to match sum of all product prices
+        // //Summ total total price to match sum of all product prices
+
+        // cy.get("h3 strong").then(function(element) {
+
+        //     const amount = element.text()
+        //     var res = amount.split(" ")
+        //     var total = res[1].trim()
+        //     expect(Number(total)).to.equal(sum)
+
+        // })
+        cy.get("tr td:nth-child(4) strong").then(function ($cells) {
+            const totals = $cells
+              .toArray()
+              .map(function (el) {return el.innerText})
+              .map(function (s) {return s.replace('₹.', '')})
+              .map(parseFloat)
         
-        cy.get("h3 strong").then(function(element) {
-            const amount = element.text()
-            var res = amount.split(" ")
-            var total = res[1].trim()
-            expect(Number(total)).to.equal(sum)
+            const sum = Cypress._.sum(totals)
+            cy.log(`Total should be ${sum}`)
+            cy.contains("h3 strong", + sum)
 
-        })
+                    
+          })
         
 
 

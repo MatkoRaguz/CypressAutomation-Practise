@@ -34,7 +34,8 @@ describe('Test Framework', () => {
         Plp.checkoutButton().click()
 
         // //Itterate thru price of product and sum them to match final price
-    
+        
+        //Shetty:
         // var sum = 0
         // cy.get("tr td:nth-child(4) strong").each(($el) => {
 
@@ -59,6 +60,8 @@ describe('Test Framework', () => {
         //     expect(Number(total)).to.equal(sum)
 
         // })
+
+        //Gleb:
         cy.get("tr td:nth-child(4) strong").then(function ($cells) {
             const totals = $cells
               .toArray()

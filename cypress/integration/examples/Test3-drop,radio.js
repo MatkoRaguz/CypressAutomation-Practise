@@ -28,7 +28,8 @@ describe('ClickAcademy', () => {
         //Dynamic 
         cy.get("#autocomplete").type("sw")
         
-
+        //Iterate thru elements in list and if element contain word we
+        // looking for it wrap that element and click it
         cy.get(".ui-menu-item").each(($el, $list, index) =>
         {
             if ($el.text()==="Switzerland") {
